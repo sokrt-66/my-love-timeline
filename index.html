@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我们的爱情时间线</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .love-container {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .love-days {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            margin: 20px 0;
+        }
+
+        .love-details {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .memory {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="love-container">
+        <h1>❤️ 我们的爱情故事 ❤️</h1>
+        <div class="love-days" id="loveDays">0</div>
+
+        <div class="love-details">
+            <div>
+                <h3>小时</h3>
+                <p id="loveHours">0</p>
+            </div>
+            <div>
+                <h3>分钟</h3>
+                <p id="loveMinutes">0</p>
+            </div>
+        </div>
+
+        <div id="loveMemories"></div>
+    </div>
+
+    <script>
+        // 恋爱开始日期
+        const loveStartDate = new Date('2024-12-28'); // 请根据实际日期修改
+
+        function updateLoveTime() {
+            const now = new Date();
+            const diff = now - loveStartDate;
+
+            // 计算天数
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            // 计算小时
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+
+            // 计算分钟
+            const minutes = Math.floor(diff / (1000 * 60));
+
+            document.getElementById('loveDays').innerText = days;
+            document.getElementById('loveHours').innerText = hours;
+            document.getElementById('loveMinutes').innerText = minutes;
+        }
+
+        // 添加纪念日记录
+        function addMemory(date, memory) {
+            const memoriesEl = document.getElementById('loveMemories');
+            const memoryEl = document.createElement('div');
+            memoryEl.className = 'memory';
+            memoryEl.innerHTML = `
+                <h4>${date}</h4>
+                <p>${memory}</p>
+            `;
+            memoriesEl.appendChild(memoryEl);
+        }
+
+        // 初始化
+        updateLoveTime();
+
+        // 每分钟更新一次
+        setInterval(updateLoveTime, 60000);
+
+        // 添加一些示例纪念日
+        addMemory('2023-07-20', '我们的第一次约会');
+        addMemory('2023-08-15', '第一次牵手');
+        addMemory('2023-09-01', '一起看电影');
+        addMemory('2023-10-10', '庆祝周年纪念');
+    </script>
+</body>
+</html>
